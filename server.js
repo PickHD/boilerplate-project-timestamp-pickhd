@@ -27,7 +27,7 @@ app.get("/api/hello", (req, res)=> {
 });
 
 app.get("/api/timestamp",(req,res)=>{
-  res.json({unix:new Date().getTime(),utc:new Date().toUTCString()})
+  res.json({unix:new Date().valueOf(),utc:new Date().toUTCString()})
 })
 
 app.get("/api/timestamp/:date",(req,res)=>{
@@ -37,9 +37,9 @@ app.get("/api/timestamp/:date",(req,res)=>{
 
   if(isDateValid||isUnixDateValid){
     if(date.length > 12){
-      res.json({unix: Math.round(new Date(parseInt(date)).getTime()),utc:new Date(parseInt(date)).toUTCString()})
+      res.json({unix: new Date(parseInt(date)).valueOf(),utc:new Date(parseInt(date)).toUTCString()})
     }else{
-      res.json({unix: Math.round(new Date(date).getTime()),utc: new Date(date). toUTCString()})
+      res.json({unix: new Date(date).valueOf(),utc: new Date(date).toUTCString()})
     }
   }else{
     res.json({error:"Invalid Date"})  
